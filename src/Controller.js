@@ -20,7 +20,7 @@ function Controller(props) {
                     <Input type='text' value={newTitle} onChange ={(e) => setNewTitle(e.target.value)}> </Input>
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => props.addNewTask(newTitle)}>Add New Task</Button>
+                    <Button onClick={() => props.addNewTask(newTitle) || setIsModalOpen(false)}>Add New Task</Button>
                     {' '}
                     <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
                 </ModalFooter>
