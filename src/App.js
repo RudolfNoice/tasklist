@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Container, Row,} from "reactstrap";
 import Column from "./Column";
 import AddTaskModal from "./AddTaskModal"
+import AddColumnModal from "./AddColumnModal";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       {id:Math.random(), name:'Second Task ', priority: 2, status:'todo'},
       {id:Math.random(), name:'Third Task ', priority: 3, status:'todo'},
       {id:Math.random(), name:'Fourth Task ', priority: 4, status:'todo'},
+      {id:Math.random(), name:'Fifth Task ', priority: 4, status:'do again'},
   ]
 
     const columnList = [
@@ -21,9 +23,21 @@ function App() {
 
     const [tasks, setTasks] = useState(taskList)
 
+    const [columns, setColumns] = useState(columnList)
+
     const statuses = ['todo', 'progress', 'review', 'done'];
 
     const taskPriority = [4, 3, 2, 1]
+
+    const addNewColumn = (title) => {
+        const newColumn = {
+            id:Math.random(),
+            title: title,
+            status:'do again'
+        }
+        const newColumns = [...columns, newColumn]
+        setColumns(newColumns);
+    }
 
     const addNewTask = (newTitle, newPriority, newStatus) => {
         const newTask = {
@@ -64,13 +78,27 @@ function App() {
     return (
     <div>
       <Container>
-        <Row>
 
-            <AddTaskModal addNewTask={addNewTask}/>
-            {columnList.map(el => <Column tasks={tasks} column={el} changeTaskStatus={changeTaskStatus} deleteTask={deleteTask}/>)}
+        <AddColumnModal addNewColumn={addNewColumn}/>
+
+          {' '}
+
+          <AddTaskModal addNewTask={addNewTask}/>
+
+          <Row>
+
+            {columns.map(el => <Column
+                tasks={tasks}
+                column={el}
+                changeTaskStatus={changeTaskStatus}
+                deleteTask={deleteTask}
+            />)}
+
 
         </Row>
+
       </Container>
+
     </div>
   );
 }
