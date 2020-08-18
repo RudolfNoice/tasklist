@@ -4,7 +4,7 @@ import Task from './Task';
 
 function Column(props) {
 
-    const {tasks, changeTaskStatus, column} = props
+    const {tasks, changeTaskStatus, column, deleteTask} = props
 
     return (
     <div>
@@ -15,7 +15,7 @@ function Column(props) {
           {tasks
               .filter(el => el.status === column.status)
               .sort((a, b) => a.priority - b.priority)
-              .map(el => <Task task = {el} changeTaskStatus={changeTaskStatus} />)}
+              .map(el => <Task task = {el} changeTaskStatus={changeTaskStatus} deleteTask={deleteTask}/>)}
 
       </Col>
     </div>

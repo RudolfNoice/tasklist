@@ -6,7 +6,7 @@ function Task(props) {
 
     const alertColors = ['success', 'warning', 'danger', 'info']
 
-    const {task, changeTaskStatus} = props
+    const {task, changeTaskStatus, deleteTask} = props
 
     return (
         <div>
@@ -15,13 +15,13 @@ function Task(props) {
                     <CardBody>
 
                         {task.name}
-
+                        <Button onClick={() => deleteTask(task.id)} size='sm'>Delete</Button>
                         <Alert color={alertColors[task.priority]}>
                             {task.priority}
-                            {task.priority !== 4 &&
+                            {task.priority !== 1 &&
                             <Button size='sm' onClick={() => changeTaskStatus(task.id, 'up')}>↑</Button>}
                             {' '}
-                            {task.priority !== 0 &&
+                            {task.priority !== 4 &&
                             <Button size='sm' onClick={() => changeTaskStatus(task.id, 'down')}>↓</Button>}
                         </Alert>
 

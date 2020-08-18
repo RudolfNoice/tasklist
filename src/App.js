@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {Container, Row,} from "reactstrap";
 import Column from "./Column";
-import Controller from "./Controller"
+import AddTaskModal from "./AddTaskModal"
 
 function App() {
 
   const taskList = [
-      {id:Math.random(), name:'First', priority: 1, status:'todo'},
-      {id:Math.random(), name:'Second', priority: 2, status:'todo'},
-      {id:Math.random(), name:'Third', priority: 3, status:'todo'},
-      {id:Math.random(), name:'Fourth', priority: 4, status:'todo'},
+      {id:Math.random(), name:'First Task ', priority: 1, status:'todo'},
+      {id:Math.random(), name:'Second Task ', priority: 2, status:'todo'},
+      {id:Math.random(), name:'Third Task ', priority: 3, status:'todo'},
+      {id:Math.random(), name:'Fourth Task ', priority: 4, status:'todo'},
   ]
 
     const columnList = [
@@ -23,14 +23,14 @@ function App() {
 
     const statuses = ['todo', 'progress', 'review', 'done'];
 
-    const taskPriority = [1, 2, 3, 4]
+    const taskPriority = [4, 3, 2, 1]
 
-    const addNewTask = (newTitle) => {
+    const addNewTask = (newTitle, newPriority, newStatus) => {
         const newTask = {
             id:Math.random(),
             name: newTitle,
-            priority: 4,
-            status:'todo'
+            priority: newPriority,
+            status: newStatus
         }
         const newTasks = [...tasks, newTask]
         setTasks(newTasks)
@@ -54,14 +54,20 @@ function App() {
       setTasks(newTask)
     }
 
+    const deleteTask = (taskId) => {
+        const newTasks = tasks.filter (el => el.id !== taskId)
+    setTasks(newTasks)
+    }
+
+
 
     return (
     <div>
       <Container>
         <Row>
 
-            <Controller addNewTask={addNewTask}/>
-            {columnList.map(el => <Column tasks={tasks} column={el} changeTaskStatus={changeTaskStatus}/>)}
+            <AddTaskModal addNewTask={addNewTask}/>
+            {columnList.map(el => <Column tasks={tasks} column={el} changeTaskStatus={changeTaskStatus} deleteTask={deleteTask}/>)}
 
         </Row>
       </Container>
