@@ -4,7 +4,7 @@ import {Col, Card, CardBody, Button, Alert} from 'reactstrap';
 
 function Task(props) {
 
-    const alertColors = ['success', 'warning', 'danger', 'info']
+    const alertColors = [ 'success', 'danger', 'warning', 'info']
 
     const {task, changeTaskStatus, deleteTask} = props
 
